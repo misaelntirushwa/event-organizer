@@ -1,0 +1,10 @@
+<div [ngClass]="containerClass()" [ngStyle]="style">
+  <ng-content></ng-content>
+  <span *ngIf="label; else iconTemplate">{{ label }}</span>
+  <ng-template #iconTemplate>
+    <span [ngClass]="'avatar-icon'" *ngIf="icon; else imageTemplate">
+      <i [class]="icon" aria-hidden="true"></i>
+    </span>
+  </ng-template>
+  <ng-template #imageTemplate><img [src]="image" *ngIf="image" alt="avatar"/></ng-template>
+</div>

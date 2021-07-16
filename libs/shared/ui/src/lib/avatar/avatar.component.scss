@@ -1,0 +1,51 @@
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a2c6f5;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+
+  &.avatar-image {
+    background-color: transparent;
+  }
+
+  &.avatar-circle {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  &.avatar-square {
+    border-radius: 4px;
+  }
+
+  .avatar-icon {
+    font-size: 1rem;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.avatar-lg {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+
+    .avatar-icon {
+      font-size: 1.5rem;
+    }
+  }
+
+  &.avatar-xl {
+    width: 4rem;
+    height: 4rem;
+    font-size: 2rem;
+
+    .avatar-icon {
+      font-size: 2rem;
+    }
+  }
+}
