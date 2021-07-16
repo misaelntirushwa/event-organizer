@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "projects": {
+    "event": {
+      "projectType": "application",
+      "root": "apps/event",
+      "sourceRoot": "apps/event/src",
+      "prefix": "event-organizer",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/event",
+            "index": "apps/event/src/index.html",
+            "main": "apps/event/src/main.ts",
+            "polyfills": "apps/event/src/polyfills.ts",
+            "tsConfig": "apps/event/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/event/src/favicon.ico", "apps/event/src/assets"],
+            "styles": ["apps/event/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/event/src/environments/environment.ts",
+                  "with": "apps/event/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "event:build:production"
+            },
+            "development": {
+              "browserTarget": "event:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "event:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/event/src/**/*.ts",
+              "apps/event/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/event"],
+          "options": {
+            "jestConfig": "apps/event/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "event-e2e": {
+      "root": "apps/event-e2e",
+      "sourceRoot": "apps/event-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/event-e2e/cypress.json",
+            "tsConfig": "apps/event-e2e/tsconfig.e2e.json",
+            "devServerTarget": "event:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "event:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/event-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "defaultProject": "event"
+}
